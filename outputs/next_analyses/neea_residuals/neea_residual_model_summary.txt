@@ -1,0 +1,35 @@
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:             delta_neea   R-squared:                       0.298
+Model:                            OLS   Adj. R-squared:                  0.268
+Method:                 Least Squares   F-statistic:                     8.873
+Date:                Tue, 09 Jun 2026   Prob (F-statistic):           2.41e-11
+Time:                        23:52:26   Log-Likelihood:                -623.77
+No. Observations:                 225   AIC:                             1268.
+Df Residuals:                     215   BIC:                             1302.
+Df Model:                           9                                         
+Covariance Type:                  HC3                                         
+=========================================================================================
+                            coef    std err          z      P>|z|      [0.025      0.975]
+-----------------------------------------------------------------------------------------
+Intercept              -307.4206    107.607     -2.857      0.004    -518.326     -96.515
+C(uf_x)[T.MG]             0.3196      0.890      0.359      0.720      -1.425       2.065
+C(uf_x)[T.MS]            -1.7542      1.722     -1.019      0.308      -5.129       1.621
+C(uf_x)[T.MT]            -3.8525      2.177     -1.770      0.077      -8.119       0.414
+C(uf_x)[T.PR]            -1.1170      0.942     -1.186      0.236      -2.963       0.729
+C(uf_x)[T.SP]            -0.8918      0.970     -0.920      0.358      -2.792       1.008
+mean_first_key_year       0.1549      0.052      2.959      0.003       0.052       0.258
+neea_first               -0.3597      0.057     -6.331      0.000      -0.471      -0.248
+_log_scale                1.3296      0.588      2.263      0.024       0.178       2.481
+share_cane_slope_le12     6.2056      4.879      1.272      0.203      -3.358      15.769
+==============================================================================
+Omnibus:                       18.127   Durbin-Watson:                   1.693
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               36.245
+Skew:                          -0.392   Prob(JB):                     1.35e-08
+Kurtosis:                       4.803   Cond. No.                     7.85e+05
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC3)
+[2] The condition number is large, 7.85e+05. This might indicate that there are
+strong multicollinearity or other numerical problems.

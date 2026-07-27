@@ -1,0 +1,2 @@
+n,k_neighbors,moran_i,expected_i,p_permutation,z_sim,permutations
+225,8,0.007304523099768881,-0.004464285714285714,0.346,0.3989330877397376,999

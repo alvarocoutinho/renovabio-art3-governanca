@@ -1,0 +1,11 @@
+﻿outcome,model,n,formula,buffer_km
+delta_neea,M1 — fronteira,225,delta_neea ~ frontier_year_c,25
+delta_neea,M2 — + nível inicial,225,delta_neea ~ frontier_year_c + neea_first_c,25
+delta_neea,M3 — + escala e UF,225,delta_neea ~ frontier_year_c + neea_first_c + log_cane_area + C(uf_x),25
+delta_neea,M4 — + topografia,225,delta_neea ~ frontier_year_c + neea_first_c + log_cane_area + share_cane_slope_le12 + C(uf_x),25
+delta_neea,M5 — + uso anterior,225,delta_neea ~ frontier_year_c + neea_first_c + log_cane_area + share_cane_slope_le12 + prior_pasture_share + prior_annual_agriculture_share + prior_native_vegetation_share + C(uf_x),25
+delta_vol_pct,M1 — fronteira,221,delta_vol_pct ~ frontier_year_c,25
+delta_vol_pct,M2 — + nível inicial,221,delta_vol_pct ~ frontier_year_c + vol_pct_first_c,25
+delta_vol_pct,M3 — + escala e UF,221,delta_vol_pct ~ frontier_year_c + vol_pct_first_c + log_cane_area + C(uf_x),25
+delta_vol_pct,M4 — + topografia,221,delta_vol_pct ~ frontier_year_c + vol_pct_first_c + log_cane_area + share_cane_slope_le12 + C(uf_x),25
+delta_vol_pct,M5 — + uso anterior,221,delta_vol_pct ~ frontier_year_c + vol_pct_first_c + log_cane_area + share_cane_slope_le12 + prior_pasture_share + prior_annual_agriculture_share + prior_native_vegetation_share + C(uf_x),25

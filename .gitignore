@@ -1,0 +1,80 @@
+# =====================================================================
+# CAMADA RAW — bases brutas de terceiros, NAO redistribuidas
+# =====================================================================
+data/raw/*
+!data/raw/MANIFEST.md
+!data/raw/.gitkeep
+
+# =====================================================================
+# CACHES INTERMEDIARIOS
+# Regeneraveis, porem custosos. Ver secao "Caches intermediarios" do README:
+# recomenda-se deposita-los no Zenodo como registro Dataset separado.
+# =====================================================================
+data/interim/*
+!data/interim/.gitkeep
+
+# Draws de bootstrap (1500 replicas) — regeneravel pela semente declarada
+*bootstrap_draws.parquet
+previous_land_use_grid_year_long.parquet
+
+# =====================================================================
+# Modelo digital de elevacao e rasters
+# =====================================================================
+*.tif
+*.tiff
+*.vrt
+*.hgt
+*.img
+dem/
+
+# Shapefiles (usar GeoPackage/GeoParquet no lugar)
+*.shp
+*.shx
+*.dbf
+*.prj
+*.cpg
+*.sbn
+*.sbx
+
+# =====================================================================
+# Pacotes de exportacao gerados pelo notebook
+# =====================================================================
+*.zip
+*.7z
+AmbSoc_artigo_consolidado_local_multiescala.zip
+
+# Mapas em alta resolucao (600 dpi) — versionar apenas os do manuscrito
+outputs/maps/
+
+# =====================================================================
+# Python
+# =====================================================================
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+
+# =====================================================================
+# Jupyter
+# =====================================================================
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# =====================================================================
+# Credenciais
+# =====================================================================
+.env
+*.key
+*token*
+credentials.json
+
+# =====================================================================
+# Sistema
+# =====================================================================
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

@@ -1,0 +1,28 @@
+{
+  "title": "Da fronteira mecanizada ao carbono certificado: governanca historica, selecao territorial e desempenho no RenovaBio — pacote de replicacao",
+  "upload_type": "software",
+  "description": "Pacote de replicacao do manuscrito submetido a Ambiente & Sociedade (ANPPAS). Analise historico-institucional da expansao do setor sucroenergetico, da selecao territorial da fronteira canavieira (1985-2015) e da relacao entre trajetoria de governanca e desempenho contemporaneo certificado no RenovaBio. Saidas bilingues (portugues e ingles).",
+  "creators": [
+    {
+      "name": "Coutinho, Alvaro Luz Alves",
+      "affiliation": "Universidade de Sao Paulo (ESALQ/CENA)",
+      "orcid": "0000-0000-0000-0000"
+    }
+  ],
+  "license": "MIT",
+  "access_right": "open",
+  "language": "por",
+  "keywords": [
+    "RenovaBio",
+    "historical governance",
+    "agricultural frontier",
+    "territorial selection",
+    "land use change",
+    "spatial autocorrelation",
+    "Brazil"
+  ],
+  "grants": [
+    {"id": "10.13039/501100001807::2025/01530-0"}
+  ],
+  "notes": "This study was financed, in part, by the Sao Paulo Research Foundation (FAPESP), Brazil. Process Number #2025/01530-0."
+}

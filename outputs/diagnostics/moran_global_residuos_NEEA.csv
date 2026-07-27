@@ -1,0 +1,2 @@
+﻿model,n,k_neighbors,moran_i,expected_i,p_permutation,z_sim,permutations,is_main_knn
+M5 — + uso anterior,225,6,0.026296082565865915,-0.004464285714285714,0.184,0.8593479008618922,999,True

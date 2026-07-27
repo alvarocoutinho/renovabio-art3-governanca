@@ -1,0 +1,36 @@
+# Ambiente de replicacao — Art. 3 (Ambiente & Sociedade)
+# Python 3.11
+#
+# ATENCAO: versoes abaixo sao ponto de partida. Confirme no ambiente que gerou
+# os resultados finais com:
+#   pip freeze | grep -E "pandas|numpy|geopandas|shapely|libpysal|esda|statsmodels|patsy|matplotlib|openpyxl"
+# e ajuste antes do release.
+
+# --- Nucleo ---
+pandas==2.2.2
+numpy==1.26.4
+pyyaml==6.0.1
+
+# --- Geoprocessamento ---
+# CRITICO: a versao do pyproj determina a base PROJ usada nas transformacoes
+# de CRS. Divergencias de versao alteram distancias e, portanto, os buffers.
+geopandas==1.0.1
+shapely==2.0.5
+pyproj==3.6.1
+fiona==1.9.6
+
+# --- Analise espacial ---
+libpysal==4.12.1
+esda==2.6.0
+
+# --- Modelagem ---
+statsmodels==0.14.2
+patsy==0.5.6
+
+# --- Visualizacao e exportacao ---
+matplotlib==3.9.0
+openpyxl==3.1.5
+
+# --- Notebooks ---
+jupyter==1.0.0
+nbstripout==0.7.1

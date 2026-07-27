@@ -1,0 +1,57 @@
+# Parâmetros do pipeline — Art. 3 (Ambiente & Sociedade)
+# Externalização do dicionário CFG do notebook v4.2.
+# Valores refletem a execução que gerou os resultados do manuscrito,
+# salvo onde marcado PREENCHER.
+
+paths:
+  # Substitua pelos caminhos locais. Os originais eram absolutos do Colab
+  # (/content/drive/MyDrive/Pesquisa Mestrado), o que impede execução por terceiros.
+  root: "./"
+  data_raw: "data/raw"
+  data_interim: "data/interim"
+  data_processed: "data/processed"
+  outputs: "outputs"
+
+temporalidade:
+  main_schema: "pre_renovabio_1985_2015"
+
+buffers:
+  main_buffer_km: 30
+  legacy_buffer_km: 25
+  buffer_candidates_km: [25, 30, 50, 100, 150]
+  # CRÍTICO: manter false no pacote publicado. Ver README, seção 2.
+  # true faz o notebook substituir caches ausentes por aproximação a partir
+  # da grade de origem, tornando o resultado dependente do estado do disco.
+  fallback_to_available_buffer: false
+
+uso_anterior:
+  origin_model_year_min: 1987
+  origin_model_year_max: 2015
+  run_unit_origin_approximation_from_grid: true
+  n_boot_origin: 1500
+  origin_seed: 20260609
+  save_origin_draws: true
+
+pesos_espaciais:
+  k_neighbors: 6
+  k_neighbors_robustness: [4, 6, 8, 10]
+  permutations: 999
+  fdr_alpha: 0.05
+  # CRÍTICO: adicionar. O RNG do esda não é semeado no notebook original,
+  # o que faz os p-valores do Moran/LISA variarem entre execuções.
+  # Ver README, seção 3.
+  spatial_seed: PREENCHER
+
+crs:
+  # CRÍTICO: fixar explicitamente. O notebook infere o CRS das coordenadas
+  # das usinas por pontuação entre candidatos, e toda a análise de distância
+  # depende dessa escolha. Ver README, seção 1, e o diagnóstico
+  # outputs/diagnostics/diagnostico_crs_coordenadas_usinas.csv
+  unit_coord_crs: "EPSG:PREENCHER"
+  # CRS projetado usado no diagnóstico Moran/LISA
+  analysis_crs: "EPSG:5880"
+
+exportacao:
+  figure_dpi: 600
+  save_svg: true
+  idiomas: ["ptbr", "en"]

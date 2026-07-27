@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "Se você utilizar este material, por favor cite conforme abaixo."
+title: "Da fronteira mecanizada ao carbono certificado: governança histórica, seleção territorial e desempenho no RenovaBio — pacote de replicação"
+abstract: >-
+  Pacote de replicação da análise histórico-institucional da expansão do setor
+  sucroenergético brasileiro, da seleção territorial da fronteira canavieira
+  (1985–2015) e de sua relação com o desempenho contemporâneo certificado no
+  RenovaBio. Inclui a reconstrução da geografia histórica da fronteira, a
+  seleção topográfica da expansão a partir de modelo digital de elevação, a
+  análise de uso anterior das novas áreas de cana com bootstrap, e a modelagem
+  de ΔNEEA e Δvol% por geração institucional com diagnóstico de autocorrelação
+  espacial dos resíduos.
+type: software
+authors:
+  - family-names: Coutinho
+    given-names: Alvaro Luz Alves
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+    affiliation: "Universidade de São Paulo (ESALQ/CENA)"
+version: 1.0.0
+date-released: "2026-08-01"
+license: MIT
+repository-code: "https://github.com/USUARIO/renovabio-art3-governanca"
+keywords:
+  - RenovaBio
+  - historical governance
+  - agricultural frontier
+  - territorial selection
+  - land use change
+  - spatial autocorrelation
+  - Brazil

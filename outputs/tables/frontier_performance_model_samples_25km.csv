@@ -1,0 +1,25 @@
+﻿schema,model,outcome,n_available,missing_outcome,missing_initial,missing_frontier,missing_cane_area
+10y_1985_2024,Delta NEEA frontier,delta_neea,226,0,0,2,0
+10y_1985_2024,Delta NEEA share recent 2015+,delta_neea,226,0,0,2,0
+10y_1985_2024,Delta NEEA share old <=1995,delta_neea,226,0,0,2,0
+10y_1985_2024,NEEA ANCOVA frontier,neea_t2_2026,226,0,0,2,0
+10y_1985_2024,Delta VOL frontier,delta_vol_pct,222,4,0,2,0
+10y_1985_2024,Delta VOL share recent 2015+,delta_vol_pct,222,4,0,2,0
+10y_1985_2024,Delta VOL share old <=1995,delta_vol_pct,222,4,0,2,0
+10y_1985_2024,VOL ANCOVA frontier,vol_pct_t2_2026,222,4,0,2,0
+5y_1985_2024,Delta NEEA frontier,delta_neea,226,0,0,2,0
+5y_1985_2024,Delta NEEA share recent 2015+,delta_neea,226,0,0,2,0
+5y_1985_2024,Delta NEEA share old <=1995,delta_neea,226,0,0,2,0
+5y_1985_2024,NEEA ANCOVA frontier,neea_t2_2026,226,0,0,2,0
+5y_1985_2024,Delta VOL frontier,delta_vol_pct,222,4,0,2,0
+5y_1985_2024,Delta VOL share recent 2015+,delta_vol_pct,222,4,0,2,0
+5y_1985_2024,Delta VOL share old <=1995,delta_vol_pct,222,4,0,2,0
+5y_1985_2024,VOL ANCOVA frontier,vol_pct_t2_2026,222,4,0,2,0
+pre_renovabio_1985_2015,Delta NEEA frontier,delta_neea,225,0,0,3,0
+pre_renovabio_1985_2015,Delta NEEA share recent 2015+,delta_neea,225,0,0,3,0
+pre_renovabio_1985_2015,Delta NEEA share old <=1995,delta_neea,225,0,0,3,0
+pre_renovabio_1985_2015,NEEA ANCOVA frontier,neea_t2_2026,225,0,0,3,0
+pre_renovabio_1985_2015,Delta VOL frontier,delta_vol_pct,221,4,0,3,0
+pre_renovabio_1985_2015,Delta VOL share recent 2015+,delta_vol_pct,221,4,0,3,0
+pre_renovabio_1985_2015,Delta VOL share old <=1995,delta_vol_pct,221,4,0,3,0
+pre_renovabio_1985_2015,VOL ANCOVA frontier,vol_pct_t2_2026,221,4,0,3,0
