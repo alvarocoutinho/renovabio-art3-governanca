@@ -4,11 +4,10 @@
 # salvo onde marcado PREENCHER.
 
 paths:
-  # Substitua pelos caminhos locais. Os originais eram absolutos do Colab
-  # (/content/drive/MyDrive/Pesquisa Mestrado), o que impede execução por terceiros.
+  # Relativos à raiz do repositório, resolvida automaticamente pela célula 0.
+  # Para executar a partir de outro diretório, defina AMBSOC_REPO_ROOT.
   root: "./"
   data_raw: "data/raw"
-  data_interim: "data/interim"
   data_processed: "data/processed"
   outputs: "outputs"
 
@@ -19,9 +18,10 @@ buffers:
   main_buffer_km: 30
   legacy_buffer_km: 25
   buffer_candidates_km: [25, 30, 50, 100, 150]
-  # CRÍTICO: manter false no pacote publicado. Ver README, seção 2.
-  # true faz o notebook substituir caches ausentes por aproximação a partir
-  # da grade de origem, tornando o resultado dependente do estado do disco.
+  # Mantido em false no pacote publicado: a ausência de um cache é reportada
+  # em vez de silenciosamente contornada por aproximação a partir da grade de
+  # origem. Em true, o resultado passa a depender de quais arquivos existem
+  # no disco. Os registros de ausência ficam em outputs/robustness/.
   fallback_to_available_buffer: false
 
 uso_anterior:
@@ -37,17 +37,21 @@ pesos_espaciais:
   k_neighbors_robustness: [4, 6, 8, 10]
   permutations: 999
   fdr_alpha: 0.05
-  # CRÍTICO: adicionar. O RNG do esda não é semeado no notebook original,
-  # o que faz os p-valores do Moran/LISA variarem entre execuções.
-  # Ver README, seção 3.
-  spatial_seed: PREENCHER
+  # Semente da inferência por permutação (Moran global e LISA).
+  # O RNG do esda é global; sem semeadura os p-valores variam entre execuções.
+  # A célula 0 do notebook define seed_spatial_inference(), chamada antes de
+  # cada estimativa, com offset derivado de k para manter independência.
+  spatial_seed: 20260609
 
 crs:
-  # CRÍTICO: fixar explicitamente. O notebook infere o CRS das coordenadas
-  # das usinas por pontuação entre candidatos, e toda a análise de distância
-  # depende dessa escolha. Ver README, seção 1, e o diagnóstico
-  # outputs/diagnostics/diagnostico_crs_coordenadas_usinas.csv
-  unit_coord_crs: "EPSG:PREENCHER"
+  # Sistema de coordenadas das colunas X/Y das usinas. DECLARADO, não inferido.
+  #
+  # Verificação: os limites observados (X 4.435.218–6.176.905;
+  # Y 7.359.058–8.620.088), interpretados em EPSG:5880, correspondem a
+  # lon -59,5 a -43,2 e lat -23,8 a -12,3 — o recorte Centro-Sul. Registro
+  # original em outputs/diagnostics/diagnostico_crs_coordenadas_usinas.csv
+  # (228 unidades).
+  unit_coord_crs: "EPSG:5880"
   # CRS projetado usado no diagnóstico Moran/LISA
   analysis_crs: "EPSG:5880"
 
