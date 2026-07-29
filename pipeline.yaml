@@ -15,14 +15,31 @@ temporalidade:
   main_schema: "pre_renovabio_1985_2015"
 
 buffers:
-  main_buffer_km: 30
+  # ESCALA PRINCIPAL: 25 km.
+  # O modelo completo principal usa o buffer de 25 km, em razão da
+  # disponibilidade de cache completo para fronteira, topografia e uso
+  # anterior. Os caches exatos publicados em outputs/tables/ correspondem
+  # a esta escala (buffer_km = 25).
+  main_buffer_km: 25
   legacy_buffer_km: 25
+
+  # Robustez multiescala: 30, 50, 100 e 150 km, estimados por aproximação
+  # a partir da grade espacial de 50 km usada nas exportações do GEE.
+  # Ver o parâmetro build_approx_frontier_from_origin_grid abaixo.
   buffer_candidates_km: [25, 30, 50, 100, 150]
-  # Mantido em false no pacote publicado: a ausência de um cache é reportada
-  # em vez de silenciosamente contornada por aproximação a partir da grade de
-  # origem. Em true, o resultado passa a depender de quais arquivos existem
-  # no disco. Os registros de ausência ficam em outputs/robustness/.
+  # Substituição do buffer PRINCIPAL por outro, caso seu cache não exista.
+  # Mantido em false: a ausência do cache principal deve interromper a
+  # execução, não ser silenciosamente contornada. Com main_buffer_km = 25,
+  # o cache existe e este parâmetro não tem efeito prático.
   fallback_to_available_buffer: false
+
+  # Construção dos buffers de ROBUSTEZ (30, 50, 100 e 150 km) por aproximação
+  # a partir da grade de origem. Este é o método declarado no manuscrito, não
+  # um contorno: os caches exatos existem apenas para 25 km.
+  # Ausências são registradas em outputs/robustness/missing_*.csv.
+  build_approx_frontier_from_origin_grid: true
+  prefer_exact_frontier_cache: true
+  run_m3_in_buffer_robustness: true
 
 uso_anterior:
   origin_model_year_min: 1987

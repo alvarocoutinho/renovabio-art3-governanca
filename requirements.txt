@@ -1,23 +1,27 @@
 # Ambiente de replicacao — Art. 3 (Ambiente & Sociedade)
 # Python 3.11
 #
-# ATENCAO: versoes abaixo sao ponto de partida. Confirme no ambiente que gerou
-# os resultados finais com:
-#   pip freeze | grep -E "pandas|numpy|geopandas|shapely|libpysal|esda|statsmodels|patsy|matplotlib|openpyxl"
-# e ajuste antes do release.
+# Confirme as versoes no ambiente que gerou os resultados finais:
+#   pip freeze | grep -E "pandas|numpy|scipy|geopandas|shapely|pyproj|libpysal|esda|statsmodels|patsy|matplotlib|openpyxl"
 
 # --- Nucleo ---
 pandas==2.2.2
 numpy==1.26.4
+
+# CRITICO: statsmodels 0.14.2 importa scipy._lib._util._lazywhere, removido
+# no scipy 1.14. Sem este pin, a importacao de statsmodels falha.
+scipy==1.13.1
+
 pyyaml==6.0.1
 
 # --- Geoprocessamento ---
-# CRITICO: a versao do pyproj determina a base PROJ usada nas transformacoes
-# de CRS. Divergencias de versao alteram distancias e, portanto, os buffers.
+# A versao do pyproj determina a base PROJ usada nas transformacoes de CRS;
+# divergencias alteram distancias e, portanto, os buffers e a matriz de pesos.
 geopandas==1.0.1
 shapely==2.0.5
 pyproj==3.6.1
 fiona==1.9.6
+pyogrio==0.9.0
 
 # --- Analise espacial ---
 libpysal==4.12.1
