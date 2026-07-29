@@ -23,6 +23,12 @@ pyproj==3.6.1
 fiona==1.9.6
 pyogrio==0.9.0
 
+# --- Formato colunar (Parquet) ---
+# A secao 5.1 grava previous_land_use_grid_year_long.parquet ao final; em uma
+# segunda execucao a rota canonica le o Parquet antes do CSV. Sem pyarrow, a
+# leitura falha.
+pyarrow==16.1.0
+
 # --- Analise espacial ---
 libpysal==4.12.1
 esda==2.6.0
