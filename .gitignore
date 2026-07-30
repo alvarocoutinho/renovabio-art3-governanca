@@ -39,6 +39,9 @@ dem/
 # =====================================================================
 # Pacotes de exportacao gerados pelo notebook
 # =====================================================================
+# O ZIP consolidado e gravado em dist/, FORA de outputs/, para nao ser
+# incluido no proprio empacotamento pela varredura recursiva.
+dist/
 *.zip
 *.7z
 AmbSoc_artigo_consolidado_local_multiescala.zip
