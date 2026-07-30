@@ -7,7 +7,7 @@ Pacote de replicação do manuscrito submetido a *Ambiente & Sociedade* (ANPPAS)
 
 **Autor:** Alvaro Luz Alves Coutinho
 
-**DOI (todas as versões):** `10.5281/zenodo.XXXXXXX`
+**DOI (todas as versões):** 10.5281/zenodo.21695174
 
 Saídas bilíngues: português (`ptbr/`) e inglês (`en/`).
 
