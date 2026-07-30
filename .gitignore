@@ -6,6 +6,16 @@ data/raw/*
 !data/raw/.gitkeep
 
 # =====================================================================
+# ATENCAO — arquivos que DEVEM permanecer versionados:
+#   data/processed/*                    insumos obrigatorios (Gate 0)
+#   outputs/dem_selection/dem_frontier* cache de topografia
+#   outputs/next_analyses/previous_land_use/previous_land_use_grid_year_long.csv
+#                                       base consolidada de uso anterior,
+#                                       insumo da rota canonica
+# Sem eles o pipeline nao executa a partir de um clone.
+# =====================================================================
+
+# =====================================================================
 # CACHES INTERMEDIARIOS
 # Regeneraveis, porem custosos. Ver secao "Caches intermediarios" do README:
 # recomenda-se deposita-los no Zenodo como registro Dataset separado.

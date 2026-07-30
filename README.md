@@ -1,12 +1,15 @@
 # Da fronteira mecanizada ao carbono certificado: governança histórica, seleção territorial e desempenho no RenovaBio
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Pacote de replicação do manuscrito submetido a *Ambiente & Sociedade* (ANPPAS).
 
 **Autor:** Alvaro Luz Alves Coutinho
 
-**DOI:** `10.5281/zenodo.XXXXXXX` <!-- substituir pelo concept DOI após o primeiro release -->
+**DOI (todas as versões):** `10.5281/zenodo.XXXXXXX`
 
-**Versão do notebook:** v4.2 final
+Saídas bilíngues: português (`ptbr/`) e inglês (`en/`).
 
 ---
 
@@ -14,13 +17,68 @@ Pacote de replicação do manuscrito submetido a *Ambiente & Sociedade* (ANPPAS)
 
 Análise histórico-institucional da expansão do setor sucroenergético, da seleção
 territorial da fronteira canavieira e da relação entre trajetória de governança e
-desempenho contemporâneo certificado no RenovaBio. Combina reconstrução da geografia
-histórica da fronteira (1985–2015), seleção topográfica da expansão a partir de
-modelo digital de elevação, uso anterior das novas áreas de cana e modelagem de
-ΔNEEA e Δvol% por geração institucional, com diagnóstico de autocorrelação espacial
-dos resíduos.
+desempenho contemporâneo certificado no RenovaBio.
 
-Saídas em **português e inglês** (`ptbr/` e `en/`).
+O desenho combina a reconstrução da geografia histórica da fronteira (1985–2015),
+a seleção topográfica da expansão a partir de modelo digital de elevação, a
+análise do uso anterior das novas áreas de cana com bootstrap, e a modelagem de
+ΔNEEA e Δvol% por geração institucional, com diagnóstico de autocorrelação
+espacial dos resíduos.
+
+| Dimensão | Escopo |
+|---|---|
+| Recorte espacial | Centro-Sul — GO, MG, MS, MT, PR, SP |
+| Fronteira canavieira | 1985–2015 (esquema `pre_renovabio_1985_2015`) |
+| Uso anterior | 1987–2015 |
+| Unidade de análise | Usina certificada (CNPJ) e seu entorno territorial |
+| Unidades no diagnóstico espacial | 225 |
+| Escala principal | Buffer de 25 km |
+| Robustez multiescala | 30, 50, 100 e 150 km |
+
+---
+
+## Validação de replicação
+
+Executado a partir de **clone limpo**, sem acesso aos arquivos locais do autor:
+
+| Resultado | |
+|---|---|
+| Outputs reproduzidos byte a byte | **154** |
+| Divergências inesperadas | **0** |
+| Divergências esperadas | 4 arquivos de inferência por permutação (ver abaixo) |
+| Figuras | 75 (bytes diferem por timestamp de renderização) |
+
+### Sobre as divergências esperadas
+
+A inferência por permutação do I de Moran e do LISA passou a ser semeada nesta
+versão (`spatial_seed = 20260609`). Os p-valores, portanto, diferem da versão
+anterior do pacote — e passam a ser reproduzíveis. A estatística I, que não
+depende de permutação, reproduz exatamente.
+
+| | Versão anterior | Esta versão |
+|---|---|---|
+| Moran's I | 0,026 | **0,026296** |
+| p (permutação) | 0,184 | **0,171** |
+
+**Valor canônico a citar:**
+
+```
+Moran's I = 0,026296  |  p = 0,171  |  z = 0,94506
+Modelo M5 (+ uso anterior)  |  n = 225  |  k = 6  |  999 permutações
+```
+
+### Robustez à vizinhança
+
+| k | Moran's I | p |
+|---|---|---|
+| 4 | 0,034613 | 0,175 |
+| **6** | **0,026296** | **0,171** |
+| 8 | 0,011104 | 0,317 |
+| 10 | −0,005924 | 0,490 |
+
+A estatística decresce monotonicamente com k e nenhum p-valor se aproxima de
+0,05 — a ausência de autocorrelação residual significativa é robusta à escolha
+de vizinhança.
 
 ---
 
@@ -28,123 +86,133 @@ Saídas em **português e inglês** (`ptbr/` e `en/`).
 
 ```
 ├── notebooks/
-│   └── AmbSoc_RenovaBio_consolidado_local_multiescala_PTBR_EN_v4_2_final.ipynb
+│   └── renovabio_art3_governanca.ipynb   # pipeline completo, seções 0 a 8
+├── pipeline.yaml                          # fonte canônica de parâmetros
 ├── data/
-│   ├── raw/          # fontes brutas — NÃO versionadas (ver MANIFEST.md)
-│   ├── interim/      # caches de fronteira, topografia e uso anterior por buffer
-│   ├── processed/    # base analítica canônica
+│   ├── raw/            # NÃO versionado — ver MANIFEST.md
+│   ├── processed/      # insumos derivados, versionados (entrada do pipeline)
 │   └── DICIONARIO.md
-├── configs/
-│   └── pipeline.yaml # parâmetros CFG externalizados
 ├── outputs/
-│   ├── tables/{ptbr,en}/
-│   ├── figures/{ptbr,en}/
-│   ├── diagnostics/
-│   └── robustness/
+│   ├── tables/{ptbr,en}/     # tabelas do manuscrito
+│   ├── figures/{ptbr,en}/    # figuras a 600 dpi
+│   ├── diagnostics/          # CRS, Moran/LISA, influência, tendências
+│   ├── robustness/           # buffers, aproximações, caches ausentes
+│   ├── dem_selection/        # seleção topográfica
+│   └── next_analyses/        # uso anterior por unidade e buffer
 └── requirements.txt
 ```
 
----
-
 ## Como reproduzir
 
-1. Instale as dependências:
+```bash
+git clone https://github.com/alvarocoutinho/renovabio-art3-governanca.git
+cd renovabio-art3-governanca
 
-   ```bash
-   python -m venv .venv && source .venv/bin/activate
-   pip install -r requirements.txt
-   ```
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+```
 
-2. Obtenha os dados brutos conforme `data/raw/MANIFEST.md` e verifique os hashes.
+Execute o notebook em `notebooks/`, seguindo a ordem das seções (0 a 8). A
+Seção 0 resolve os caminhos a partir da raiz do repositório, carrega os
+parâmetros de `pipeline.yaml` e verifica os insumos obrigatórios antes de
+qualquer modelagem (Gate 0) — nenhum insumo canônico é substituído ou simulado.
 
-3. Ajuste os caminhos em `configs/pipeline.yaml`.
+Para executar a partir de outro diretório:
 
-4. Execute o notebook na ordem das seções 1 a 8.
+```bash
+export AMBSOC_REPO_ROOT=/caminho/para/o/repositorio
+```
+
+> O pacote consolidado gerado pela Seção 7.2 é gravado em `dist/`, fora de
+> `outputs/`, e não é versionado.
+
+### Roteiro das seções
 
 | Seção | Conteúdo |
 |---|---|
+| 0 | Ambiente, caminhos, parâmetros e Gate 0 |
 | 1 | Funções auxiliares e auditoria dos caches |
 | 2 | Base analítica canônica |
 | 3 | Geografia histórica da fronteira |
 | 4 | Seleção topográfica da expansão |
 | 5 | Uso anterior das novas áreas de cana (5.4 robustez de buffers; 5.5 fronteira aproximada) |
-| 6 | Geração histórica da fronteira, ΔNEEA e Δvol% (6.2 robustez de escala) |
+| 6 | Geração histórica, ΔNEEA e Δvol% (6.2 robustez de escala) |
 | 7 | Tabelas consolidadas e pacote final |
 | 8 | Leitura rápida esperada |
 
 ---
 
-## ⚠️ Requisitos críticos de reprodutibilidade
+## Decisões metodológicas registradas no código
 
-Três pontos precisam ser resolvidos **antes** de considerar este pacote replicável.
-Estão listados aqui em vez de escondidos porque afetam os números publicados.
+### Sistema de coordenadas — declarado, não inferido
 
-### 1. Fixar o CRS das coordenadas das usinas
+As coordenadas X/Y das usinas estão em **EPSG:5880** (SIRGAS 2000 / Brazil
+Polyconic), declarado em `pipeline.yaml`. Todos os buffers e a matriz de pesos
+espaciais dependem dessa definição.
 
-O notebook **infere** o sistema de coordenadas por pontuação entre candidatos
-(`EPSG:31981`–`31986`, `3857`, `5880`). Todos os buffers, a geografia da fronteira e
-o diagnóstico Moran/LISA dependem dessa escolha. Defina explicitamente:
+Verificação independente: os limites observados (X 4.435.218–6.176.905;
+Y 7.359.058–8.620.088), interpretados nesse sistema, correspondem a longitude
+−59,5 a −43,2 e latitude −23,8 a −12,3 — exatamente o recorte Centro-Sul.
+O registro consta de `outputs/diagnostics/diagnostico_crs_coordenadas_usinas.csv`.
 
-```yaml
-unit_coord_crs: "EPSG:PREENCHER"   # em configs/pipeline.yaml
-```
+### Escala principal de 25 km
 
-O diagnóstico `diagnostico_crs_coordenadas_usinas.csv` registra qual CRS foi usado —
-confira antes de fixar.
+O modelo completo principal usa o buffer de 25 km, única escala com cache exato
+disponível para fronteira, topografia e uso anterior. Os buffers de robustez
+(30, 50, 100 e 150 km) são estimados por aproximação a partir da grade espacial
+de 50 km das exportações do Google Earth Engine — método declarado no manuscrito.
 
-### 2. Desativar o fallback de buffers
+Os buffers sem cache exato são registrados em
+`outputs/robustness/missing_buffer_caches.csv`. Publicar esse registro é o que
+permite distinguir uma estimativa exata de uma aproximada.
 
-Com `fallback_to_available_buffer: true`, o notebook substitui caches ausentes por
-aproximação construída a partir da grade de origem. Isso faz o resultado depender de
-**quais caches existem no disco**, o que é incompatível com replicação por terceiros.
+> Os buffers devem ser interpretados como aproximações espaciais da área de
+> influência territorial da usina, não como delimitação observada de fornecedores.
 
-Para o pacote publicado, use `fallback_to_available_buffer: false` e distribua os
-caches exatos (ver seção Dados abaixo), ou documente explicitamente que os resultados
-publicados usaram aproximação, indicando quais buffers.
+### Substituição do buffer principal — desativada
 
-Os arquivos `missing_buffer_caches.csv`, `missing_approx_frontier_buffers.csv` e
-`missing_unit_origin_buffers.csv` em `outputs/diagnostics/` registram o que faltou em
-cada execução. **Publique-os.**
+`fallback_to_available_buffer: false`. A ausência do cache principal interrompe a
+execução em vez de ser contornada em silêncio, evitando que o resultado dependa
+de quais arquivos existem no disco.
 
-### 3. Semear a inferência por permutação
+### Sementes
 
-`origin_seed: 20260609` governa apenas o bootstrap de uso anterior
-(`n_boot_origin: 1500`). As `permutations: 999` do Moran global e do LISA usam o RNG
-interno do `esda`, **não semeado** — os p-valores variam entre execuções.
+| Procedimento | Semente |
+|---|---|
+| Bootstrap de uso anterior (1.500 réplicas) | `origin_seed = 20260609` |
+| Inferência por permutação — Moran e LISA | `spatial_seed = 20260609` |
 
-```python
-np.random.seed(CFG['spatial_seed'])   # antes de instanciar Moran / Moran_Local
-```
+O RNG usado pelo `esda` é global. A Seção 0 define `seed_spatial_inference(offset)`,
+chamada imediatamente antes de cada estimativa, com offset derivado de `k` — cada
+teste tem semente própria e reproduzível.
 
-Defina `spatial_seed` em `configs/pipeline.yaml` e reexecute a Seção 6 antes do
-release, para que os valores publicados sejam os do pacote.
+### Base de uso anterior — duas rotas
 
----
+O módulo de uso anterior aceita, em ordem de precedência:
 
-## Dados
+1. **Base consolidada publicada** — `previous_land_use_grid_year_long.csv`
+   (299.922 linhas, 1.158 células da grade, 1987–2023). Rota canônica.
+2. **As oito exportações brutas do Google Earth Engine**, no padrão
+   `previous_land_use_AAAA_AAAA.csv`. Rota original de construção.
 
-Dados derivados em `data/interim/`, `data/processed/` e `outputs/` são produto desta
-pesquisa, sob licença CC BY 4.0.
-
-Dados brutos de terceiros **não são redistribuídos** — ver `data/raw/MANIFEST.md`.
-
-### Caches intermediários
-
-Os caches por buffer (`dem_frontier_{b}km.csv`, `previous_land_use_units_{b}km.csv`,
-`overlay_frontier_merged_long_{b}km.csv`, `frontier_temporal_robustness_*`) são
-custosos de regerar e determinam se o fallback é acionado. Recomendação: **depositar
-os caches do buffer principal (30 km) e dos buffers de robustez (25/50/100/150 km)
-como registro `Dataset` no Zenodo**, referenciado pelo DOI no `MANIFEST.md`.
-
-O `previous_land_use_bootstrap_draws.parquet` (1500 réplicas) pode ficar de fora se o
-volume pesar — é regenerável a partir da semente declarada.
+A base consolidada é o produto direto da consolidação das oito exportações e
+está preservada no pacote. Ambas as rotas produzem estrutura idêntica.
 
 ---
 
-## Licenciamento
+## Dados e licenciamento
+
+Dados derivados em `data/processed/` e `outputs/` são produto desta pesquisa,
+sob CC BY 4.0. Dados brutos de terceiros **não são redistribuídos** — fontes,
+URLs, datas de acesso, versões e hashes SHA-256 em `data/raw/MANIFEST.md`.
 
 - **Código** (`notebooks/`): MIT — ver `LICENSE`
 - **Dados derivados, tabelas e figuras**: CC BY 4.0 — ver `LICENSE-DATA`
+
+> **Atenção — share-alike.** Os dados de cobertura e uso do solo do MapBiomas são
+> licenciados em CC BY-SA 4.0. A cláusula de compartilhamento pela mesma licença
+> pode alcançar as tabelas de uso anterior, que derivam diretamente da grade.
+> Ver `LICENSE-DATA`.
 
 ## Como citar
 
